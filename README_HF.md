@@ -3,10 +3,7 @@ title: Chest X-Ray Disease Classifier
 emoji: 🫁
 colorFrom: blue
 colorTo: green
-sdk: gradio
-sdk_version: 4.44.1
-python_version: "3.10"
-app_file: app.py
+sdk: docker
 pinned: false
 license: mit
 tags:

@@ -9,6 +9,9 @@ from pathlib import Path
 # Install package dependencies first
 subprocess.check_call([sys.executable, "-m", "pip", "install", "-e", ".", "-q"])
 
+# Disable Gradio OAuth to avoid huggingface_hub version conflict
+os.environ["GRADIO_ANALYTICS_ENABLED"] = "False"
+
 import gradio as gr
 import torch
 from PIL import Image
