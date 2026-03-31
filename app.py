@@ -1,8 +1,13 @@
 """Hugging Face Gradio app for chest X-ray disease classification."""
 
 import os
+import subprocess
+import sys
 import tempfile
 from pathlib import Path
+
+# Install package dependencies first
+subprocess.check_call([sys.executable, "-m", "pip", "install", "-e", ".", "-q"])
 
 import gradio as gr
 import torch
