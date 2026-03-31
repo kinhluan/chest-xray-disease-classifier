@@ -39,6 +39,21 @@ def check_hf_login() -> bool:
         return False
 
 
+def hf_login_check() -> bool:
+    """Check HF login using hf CLI command."""
+    import subprocess
+    try:
+        result = subprocess.run(
+            ["hf", "whoami"],
+            capture_output=True,
+            text=True,
+            check=True,
+        )
+        return True
+    except subprocess.CalledProcessError:
+        return False
+
+
 def push_to_github(message: str = "Deploy: Update"):
     """Push changes to GitHub."""
     print("\n" + "=" * 50)
@@ -80,9 +95,9 @@ def push_to_hf_space(space_id: str, include_models: bool = False):
     print("=" * 50)
     
     # Check login
-    if not check_hf_login():
+    if not hf_login_check():
         print("❌ Not logged in to Hugging Face")
-        print("Please run: huggingface-cli login")
+        print("Please run: hf login")
         return False
     
     api = HfApi()

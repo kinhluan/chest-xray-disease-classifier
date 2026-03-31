@@ -173,7 +173,7 @@ Deploy to both GitHub and Hugging Face Spaces with a single command:
 
 ```bash
 # Login to Hugging Face first
-huggingface-cli login
+hf login
 
 # Add GitHub remote if not already added
 git remote add origin https://github.com/kinhluan/chest-xray-disease-classifier.git
@@ -205,7 +205,7 @@ uv run python deploy.py --hf-only --commit-message "Update Space"
 
 ```bash
 # Login to Hugging Face
-huggingface-cli login
+hf login
 
 # Push model
 uv run python push_to_hf.py \

@@ -4,7 +4,7 @@
 
 ### 1. Login to Hugging Face
 ```bash
-huggingface-cli login
+hf login
 ```
 
 Get your token from: https://huggingface.co/settings/tokens
@@ -71,7 +71,7 @@ The Space will automatically rebuild after files are uploaded.
 
 ### "Not logged in to Hugging Face"
 ```bash
-huggingface-cli login
+hf login
 ```
 
 ### "No git remote found"

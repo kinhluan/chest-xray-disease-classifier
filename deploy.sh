@@ -20,9 +20,9 @@ GIT_REMOTE=$(git remote get-url origin 2>/dev/null || echo "")
 
 # Check if huggingface-cli is logged in
 echo -e "${YELLOW}Checking Hugging Face login...${NC}"
-if ! huggingface-cli whoami &>/dev/null; then
+if ! hf whoami &>/dev/null; then
     echo -e "${RED}Not logged in to Hugging Face.${NC}"
-    echo "Please run: huggingface-cli login"
+    echo "Please run: hf login"
     exit 1
 fi
 echo -e "${GREEN}✓ Logged in to Hugging Face${NC}"
@@ -53,7 +53,7 @@ echo "Creating deployment files..."
 cp app.py app_hf.py
 
 # Deploy using huggingface-cli
-huggingface-cli upload "$HF_SPACE_ID" . "." \
+hf upload "$HF_SPACE_ID" . "." \
     --include="*.py" \
     --include="*.txt" \
     --include="*.toml" \
