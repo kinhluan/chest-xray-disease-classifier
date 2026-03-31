@@ -10,6 +10,7 @@ A deep learning project for classifying diseases from chest X-ray images using P
 - 📈 **Visualization**: Training curves and confusion matrix plots
 - 🌐 **Hugging Face Ready**: Deploy to Hugging Face Spaces with Gradio
 - 🎯 **Class Imbalance Handling**: Automatic class weight calculation
+- 🔄 **One-Click Deploy**: Push to GitHub and HF Spaces simultaneously
 
 ## Installation
 
@@ -165,18 +166,41 @@ models/
 
 ## Deployment to Hugging Face
 
-### Option 1: Deploy as a Space
+### Option 1: One-Click Deploy (Recommended)
 
-1. Copy files to your Space:
-   ```bash
-   cp app.py requirements_hf.py README_HF.md /path/to/your/space/
-   ```
+Deploy to both GitHub and Hugging Face Spaces with a single command:
 
-2. Upload your trained model to the Space
+```bash
+# Login to Hugging Face first
+huggingface-cli login
 
-3. The Space will automatically launch the Gradio interface
+# Add GitHub remote if not already added
+git remote add origin https://github.com/kinhluan/chest-xray-disease-classifier.git
 
-### Option 2: Push Model to Hugging Face Hub
+# Deploy to both platforms
+uv run python deploy.py --commit-message "Deploy: Latest update"
+```
+
+Or use the bash script:
+```bash
+./deploy.sh
+```
+
+### Option 2: Deploy to GitHub Only
+
+```bash
+git add -A
+git commit -m "Your commit message"
+git push origin master
+```
+
+### Option 3: Deploy to Hugging Face Spaces Only
+
+```bash
+uv run python deploy.py --hf-only --commit-message "Update Space"
+```
+
+### Option 4: Push Model Checkpoint to HF Hub
 
 ```bash
 # Login to Hugging Face
@@ -184,18 +208,17 @@ huggingface-cli login
 
 # Push model
 uv run python push_to_hf.py \
-    --repo_id username/chest-xray-classifier \
+    --repo_id kinhluan/chest-xray-classifier \
     --model_dir models/experiment_name \
     --private
 ```
 
-### Option 3: Create a New Space
+### Manual Space Update
 
-1. Go to [huggingface.co/spaces](https://huggingface.co/spaces)
-2. Click "Create new Space"
-3. Choose Gradio SDK
-4. Upload `app.py`, `requirements_hf.txt`, and your model
-5. Copy `README_HF.md` to `README.md`
+1. Go to your Space: https://huggingface.co/spaces/kinhluan/chest-xray-disease-classifier
+2. Click "Files" → "Add file" → "Upload files"
+3. Upload `app.py`, `requirements_hf.txt`, and your model
+4. Copy `README_HF.md` content to `README.md` in the Space
 
 ## Example Notebook
 
