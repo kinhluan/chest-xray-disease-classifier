@@ -1,6 +1,8 @@
-gradio==4.44.1
-torch>=2.0.0
-torchvision>=0.15.0
-pillow>=9.0.0
-huggingface_hub>=0.23.0,<1.0.0
-opencv-python-headless>=4.0.0
+# Hugging Face Spaces requirements
+gradio==4.29.0
+torch==2.3.0
+torchvision==0.18.0
+pillow==10.3.0
+huggingface_hub==0.23.0
+opencv-python-headless==4.9.0.80
+tqdm
