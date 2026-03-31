@@ -90,20 +90,45 @@ Organize your dataset in the following structure:
 ```
 data/
 └── raw/
-    ├── class_1/          # e.g., Normal
+    ├── Normal/
     │   ├── image1.jpg
     │   ├── image2.jpg
     │   └── ...
-    ├── class_2/          # e.g., Pneumonia
+    ├── Pneumonia/
     │   ├── image3.jpg
     │   ├── image4.jpg
     │   └── ...
-    ├── class_3/          # e.g., Tuberculosis
-    │   └── ...
-    └── ...
+    └── Tuberculosis/
+        └── ...
 ```
 
-Supported image formats: `.jpg`, `.jpeg`, `.png`, `.bmp`
+### Download Dataset (Optional)
+
+**Option 1: Chest X-Ray Pneumonia (Recommended for getting started)**
+
+```bash
+# Set Kaggle credentials
+export KAGGLE_USERNAME=your_username
+export KAGGLE_KEY=your_api_key
+
+# Download using script
+uv run python download_dataset.py --dataset pneumonia
+
+# Or download manually:
+# https://www.kaggle.com/datasets/paultimothymooney/chest-xray-pneumonia
+```
+
+**Option 2: Chest X-Ray 17 Diseases**
+
+```bash
+# Download manually:
+# https://www.kaggle.com/datasets/trainingdatapro/chest-xray-17-diseases
+# Extract to data/raw/
+```
+
+**Option 3: Use Your Own Dataset**
+
+Just organize your images in class folders under `data/raw/`
 
 ## Usage
 
