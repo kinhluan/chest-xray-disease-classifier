@@ -1,0 +1,33 @@
+[project]
+name = "chest-xray-disease-classifier"
+version = "0.1.0"
+description = "Deep learning project for classifying diseases from chest X-ray images using PyTorch"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "accelerate>=1.13.0",
+    "datasets>=4.8.4",
+    "evaluate>=0.4.6",
+    "matplotlib>=3.10.8",
+    "opencv-python-headless>=4.13.0.92",
+    "pillow>=12.1.1",
+    "scikit-learn>=1.7.2",
+    "seaborn>=0.13.2",
+    "torch>=2.11.0",
+    "torchaudio>=2.11.0",
+    "torchvision>=0.26.0",
+    "tqdm>=4.67.3",
+    "transformers>=5.4.0",
+    "huggingface-hub>=0.20.0",
+]
+
+[project.scripts]
+train = "train:main"
+predict = "predict:main"
+
+[tool.uv]
+dev-dependencies = [
+    "gradio>=4.0.0",
+    "jupyter>=1.0.0",
+    "ipykernel>=6.0.0",
+]

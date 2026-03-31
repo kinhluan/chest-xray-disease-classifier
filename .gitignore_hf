@@ -1,0 +1,33 @@
+# Hugging Face Spaces
+README.md is required by Hugging Face Spaces
+
+# Model files
+*.pth
+*.pt
+*.bin
+*.onnx
+
+# Data
+data/raw/*
+data/processed/*
+!data/raw/.gitkeep
+!data/processed/.gitkeep
+
+# Logs
+*.log
+runs/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Environment
+.env
+.venv/
