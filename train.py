@@ -12,9 +12,9 @@ from torch.optim import AdamW
 from torch.optim.lr_scheduler import ReduceLROnPlateau, CosineAnnealingLR
 from tqdm import tqdm
 
-from src.data.dataset import create_dataloaders
-from src.models.model import create_model
-from src.utils.training import (
+from classifier.data.dataset import create_dataloaders
+from classifier.models.model import create_model
+from classifier.utils.training import (
     train_epoch,
     validate,
     calculate_metrics,

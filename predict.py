@@ -13,7 +13,7 @@ from PIL import Image
 from torchvision import transforms
 from tqdm import tqdm
 
-from src.models.model import ChestXRayClassifier, DenseNetClassifier
+from classifier.models.model import ChestXRayClassifier, DenseNetClassifier
 
 
 class ChestXRayPredictor:
