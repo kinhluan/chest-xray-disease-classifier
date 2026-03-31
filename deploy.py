@@ -101,19 +101,10 @@ def push_to_hf_space(space_id: str, include_models: bool = False):
         return False
     
     api = HfApi()
-    
+
     # Get repo root
     repo_root = Path.cwd()
-    
-    # Files to upload
-    include_patterns = [
-        "*.py",
-        "*.txt",
-        "*.toml",
-        "*.md",
-        "*.json",
-    ]
-    
+
     # Patterns to exclude
     exclude_patterns = [
         ".git/*",
@@ -132,13 +123,12 @@ def push_to_hf_space(space_id: str, include_models: bool = False):
         exclude_patterns.append("models/*")
     
     try:
-        # Upload to space
+        # Upload to space (exclude patterns only - upload all files by default)
         api.upload_folder(
             folder_path=str(repo_root),
             repo_id=space_id,
             repo_type="space",
-            include=include_patterns,
-            exclude=exclude_patterns,
+            ignore_patterns=exclude_patterns,
         )
         print("✅ Pushed to Hugging Face Spaces")
         return True
