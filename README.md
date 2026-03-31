@@ -256,9 +256,15 @@ If you use this project in your research, please cite:
 
 ```bibtex
 @software{chest-xray-classifier,
-  author = {Your Name},
+  author = {Luân B.},
   title = {Chest X-Ray Disease Classifier},
-  year = {2024},
+  year = {2026},
   url = {https://github.com/kinhluan/chest-xray-disease-classifier}
 }
 ```
+
+## Author
+
+**Luân B.** - [kinhluan](https://github.com/kinhluan)
+
+Email: luanbhk@gmail.com
