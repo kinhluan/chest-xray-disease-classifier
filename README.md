@@ -104,26 +104,32 @@ data/
 
 ### Download Dataset (Optional)
 
-**Option 1: Chest X-Ray Pneumonia (Recommended for getting started)**
+**Option 1: Chest X-Ray Pneumonia/Covid/TB (Recommended)**
 
 ```bash
 # Set Kaggle credentials
 export KAGGLE_USERNAME=your_username
 export KAGGLE_KEY=your_api_key
 
-# Download using script
-uv run python download_dataset.py --dataset pneumonia
+# Download and train (automated)
+./download_and_train.sh
 
 # Or download manually:
-# https://www.kaggle.com/datasets/paultimothymooney/chest-xray-pneumonia
+# https://www.kaggle.com/datasets/jtiptj/chest-xray-pneumoniacovid19tuberculosis
+kaggle datasets download -d jtiptj/chest-xray-pneumoniacovid19tuberculosis -p data/raw --unzip
 ```
+
+**Dataset Classes:**
+- Normal
+- Pneumonia  
+- Tuberculosis
+- COVID-19
 
 **Option 2: Chest X-Ray 17 Diseases**
 
 ```bash
 # Download manually:
 # https://www.kaggle.com/datasets/trainingdatapro/chest-xray-17-diseases
-# Extract to data/raw/
 ```
 
 **Option 3: Use Your Own Dataset**
