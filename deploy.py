@@ -44,7 +44,7 @@ def hf_login_check() -> bool:
     import subprocess
     try:
         result = subprocess.run(
-            ["hf", "whoami"],
+            ["hf", "auth", "whoami"],
             capture_output=True,
             text=True,
             check=True,
@@ -97,7 +97,7 @@ def push_to_hf_space(space_id: str, include_models: bool = False):
     # Check login
     if not hf_login_check():
         print("❌ Not logged in to Hugging Face")
-        print("Please run: hf login")
+        print("Please run: hf auth login")
         return False
     
     api = HfApi()
