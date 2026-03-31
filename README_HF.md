@@ -6,7 +6,7 @@ colorTo: green
 sdk: gradio
 sdk_version: 4.44.1
 python_version: "3.10"
-app_file: app.py
+app_file: start.sh
 pinned: false
 license: mit
 tags:
