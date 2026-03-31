@@ -11,6 +11,7 @@ A deep learning project for classifying diseases from chest X-ray images using P
 - 🌐 **Hugging Face Ready**: Deploy to Hugging Face Spaces with Gradio
 - 🎯 **Class Imbalance Handling**: Automatic class weight calculation
 - 🔄 **One-Click Deploy**: Push to GitHub and HF Spaces simultaneously
+- 🌍 **Live Demo**: Try the model on Hugging Face Spaces
 
 ## Installation
 
@@ -35,6 +36,52 @@ source .venv/bin/activate  # On Windows: .venv\Scripts\activate
 # Install dependencies
 pip install -r requirements.txt
 ```
+
+## 🌍 Live Demo - Hugging Face Spaces
+
+Try the model online without installation!
+
+### Access the Demo
+
+Visit: **https://huggingface.co/spaces/kinhluan/chest-xray-disease-classifier**
+
+### How to Use the Demo
+
+1. **Upload an Image**
+   - Click on the upload box or drag & drop a chest X-ray image
+   - Supported formats: `.jpg`, `.jpeg`, `.png`, `.bmp`
+
+2. **Click "Classify"**
+   - The model will process your image
+   - Results appear in a few seconds
+
+3. **View Results**
+   - See predicted disease with confidence scores
+   - Top 5 predictions are displayed
+   - Higher probability = more confident prediction
+
+### Example Results
+
+| Disease | Probability |
+|---------|-------------|
+| Normal | 85.2% |
+| Pneumonia | 10.5% |
+| Tuberculosis | 3.1% |
+| Other | 1.2% |
+
+### Demo Limitations
+
+- ⏱️ **Processing Time**: May take 5-10 seconds for first inference
+- 📏 **Image Size**: Images are automatically resized to 224x224
+- 🧠 **Model**: Uses pretrained ResNet50/DenseNet121
+- ⚠️ **Disclaimer**: For educational purposes only, not for medical diagnosis
+
+### Tips for Best Results
+
+- Use clear, high-quality chest X-ray images
+- Ensure the image shows the full chest area
+- Images should be in RGB format (not inverted)
+- Standard medical X-ray formats work best
 
 ## Dataset Setup
 
@@ -268,3 +315,10 @@ If you use this project in your research, please cite:
 **Luân B.** - [kinhluan](https://github.com/kinhluan)
 
 Email: luanbhk@gmail.com
+
+## 📬 Contact
+
+- **GitHub**: https://github.com/kinhluan
+- **Hugging Face**: https://huggingface.co/kinhluan
+- **Project Repo**: https://github.com/kinhluan/chest-xray-disease-classifier
+- **Live Demo**: https://huggingface.co/spaces/kinhluan/chest-xray-disease-classifier
