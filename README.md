@@ -123,16 +123,17 @@ uv run python predict.py \
 ```
 chest-xray-disease-classifier/
 ├── src/
-│   ├── __init__.py
-│   ├── data/
-│   │   ├── __init__.py
-│   │   └── dataset.py      # Dataset and DataLoader utilities
-│   ├── models/
-│   │   ├── __init__.py
-│   │   └── model.py        # Model architectures
-│   └── utils/
+│   └── classifier/
 │       ├── __init__.py
-│       └── training.py     # Training utilities and metrics
+│       ├── data/
+│       │   ├── __init__.py
+│       │   └── dataset.py      # Dataset and DataLoader utilities
+│       ├── models/
+│       │   ├── __init__.py
+│       │   └── model.py        # Model architectures
+│       └── utils/
+│           ├── __init__.py
+│           └── training.py     # Training utilities and metrics
 ├── data/
 │   ├── raw/                # Raw dataset
 │   └── processed/          # Processed dataset
