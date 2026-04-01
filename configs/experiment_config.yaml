@@ -1,0 +1,113 @@
+# Experiment Configuration for Attention-Enhanced CNN Training
+# Reference: docs/ATTENTION_DESIGN.md
+
+# Dataset settings
+dataset:
+  name: "chest-xray-pneumoniacovid19tuberculosis"
+  kaggle_id: "jtiptj/chest-xray-pneumoniacovid19tuberculosis"
+  num_classes: 4
+  class_names:
+    - Normal
+    - Pneumonia
+    - Tuberculosis
+    - COVID-19
+  img_size: 224
+  val_split: 0.2
+  test_split: 0.1
+
+# Data augmentation settings
+augmentation:
+  train:
+    - name: RandomHorizontalFlip
+      params:
+        p: 0.5
+    - name: RandomVerticalFlip
+      params:
+        p: 0.5
+    - name: RandomRotation
+      params:
+        degrees: 15
+    - name: ColorJitter
+      params:
+        brightness: 0.2
+        contrast: 0.2
+    - name: RandomAffine
+      params:
+        degrees: 0
+        translate: [0.1, 0.1]
+    - name: ToTensor
+    - name: Normalize
+      params:
+        mean: [0.485, 0.456, 0.406]
+        std: [0.229, 0.224, 0.225]
+        
+  val:
+    - name: Resize
+      params:
+        size: [224, 224]
+    - name: ToTensor
+    - name: Normalize
+      params:
+        mean: [0.485, 0.456, 0.406]
+        std: [0.229, 0.224, 0.225]
+
+# Training hyperparameters
+training:
+  epochs: 50
+  batch_size: 32
+  learning_rate: 1.0e-4
+  weight_decay: 1.0e-4
+  optimizer: AdamW
+  optimizer_params:
+    betas: [0.9, 0.999]
+    eps: 1.0e-8
+    
+  # Learning rate scheduler
+  scheduler: CosineAnnealingLR
+  scheduler_params:
+    T_max: 50
+    eta_min: 1.0e-6
+    
+  # Mixed precision training
+  use_amp: true
+  
+  # Class weights for imbalanced dataset
+  use_class_weights: true
+
+# Early stopping configuration
+early_stopping:
+  enabled: true
+  patience: 10
+  min_delta: 0.001
+  mode: max  # Monitor accuracy (maximize)
+
+# Model checkpoint settings
+checkpoint:
+  save_best: true
+  monitor: val_acc
+  mode: max
+  save_last: true
+  save_freq: 10  # Save every N epochs
+
+# Hardware settings
+hardware:
+  num_workers: 4
+  pin_memory: true
+  deterministic: false  # Set true for reproducibility (slower)
+
+# Random seed for reproducibility
+seed: 42
+
+# Logging and output
+logging:
+  verbose: true
+  save_history: true
+  plot_confusion_matrix: true
+  plot_training_curves: true
+  
+# Output directories
+output:
+  base_dir: results
+  models_dir: models
+  metrics_dir: metrics
+  figures_dir: figures

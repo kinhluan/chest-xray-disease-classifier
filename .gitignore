@@ -87,3 +87,10 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+# Kaggle credentials (SECURITY - DO NOT COMMIT)
+~/.kaggle/kaggle.json
+.kaggle/
+
+# Qwen config with API keys
+.qwen/mcp-config.json
