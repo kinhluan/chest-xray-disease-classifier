@@ -14,6 +14,7 @@ from tqdm import tqdm
 
 from classifier.data.dataset import create_dataloaders
 from classifier.models.model import create_model
+from classifier.models.attention_models import create_attention_model
 from classifier.utils.training import (
     train_epoch,
     validate,
@@ -66,7 +67,7 @@ def parse_args():
         "--model_type",
         type=str,
         default="resnet",
-        choices=["resnet", "densenet"],
+        choices=["resnet", "densenet", "attention"],
         help="Model architecture type",
     )
     parser.add_argument(
@@ -74,6 +75,24 @@ def parse_args():
         type=str,
         default="resnet50",
         help="Specific model variant",
+    )
+    parser.add_argument(
+        "--attention",
+        action="store_true",
+        help="Use attention mechanism",
+    )
+    parser.add_argument(
+        "--attention_type",
+        type=str,
+        default="cbam",
+        choices=["se", "cbam", "eca", "none"],
+        help="Type of attention mechanism",
+    )
+    parser.add_argument(
+        "--attention_reduction",
+        type=int,
+        default=16,
+        help="Reduction ratio for attention modules",
     )
     parser.add_argument(
         "--dropout_rate",
@@ -193,14 +212,27 @@ def main():
     
     # Create model
     print("\nCreating model...")
-    model = create_model(
-        model_type=args.model_type,
-        model_name=args.model_name,
-        num_classes=num_classes,
-        pretrained=args.pretrained,
-        dropout_rate=args.dropout_rate,
-        freeze_backbone=args.freeze_backbone,
-    )
+    if args.model_type == "attention" or args.attention:
+        model = create_attention_model(
+            backbone=args.model_name,
+            attention_type=args.attention_type,
+            num_classes=num_classes,
+            pretrained=args.pretrained,
+            dropout_rate=args.dropout_rate,
+            freeze_backbone=args.freeze_backbone,
+            attention_reduction=args.attention_reduction,
+        )
+        print(f"  Architecture: {args.model_name} + {args.attention_type.upper()} Attention")
+    else:
+        model = create_model(
+            model_type=args.model_type,
+            model_name=args.model_name,
+            num_classes=num_classes,
+            pretrained=args.pretrained,
+            dropout_rate=args.dropout_rate,
+            freeze_backbone=args.freeze_backbone,
+        )
+        print(f"  Architecture: {args.model_type}/{args.model_name}")
     model = model.to(device)
     
     # Calculate class weights for imbalanced dataset

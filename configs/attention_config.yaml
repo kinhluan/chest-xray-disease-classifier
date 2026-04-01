@@ -1,0 +1,94 @@
+# Attention Module Configurations
+# Reference: docs/ATTENTION_DESIGN.md
+
+attention:
+  # Squeeze-and-Excitation Block
+  se:
+    reduction: 16
+    description: "Channel attention via FC layers"
+    
+  # Convolutional Block Attention Module
+  cbam:
+    reduction: 16
+    kernel_size: 7
+    description: "Channel + Spatial attention (recommended for TB detection)"
+    
+  # Efficient Channel Attention
+  eca:
+    gamma: 2.0
+    b: 1.0
+    description: "Efficient channel attention with 1D convolution"
+
+# Model Configurations
+models:
+  # ResNet50 variants
+  - name: resnet50_baseline
+    backbone: resnet50
+    attention: null
+    expected_params_m: 25.6
+    expected_tb_sensitivity: "0.75-0.80"
+    
+  - name: resnet50_se
+    backbone: resnet50
+    attention: se
+    expected_params_m: 28.1
+    expected_tb_sensitivity: "0.80-0.85"
+    
+  - name: resnet50_cbam
+    backbone: resnet50
+    attention: cbam
+    expected_params_m: 28.5
+    expected_tb_sensitivity: "0.82-0.87"
+    
+  - name: resnet50_eca
+    backbone: resnet50
+    attention: eca
+    expected_params_m: 26.2
+    expected_tb_sensitivity: "0.78-0.83"
+    
+  # DenseNet121 variants
+  - name: densenet121_baseline
+    backbone: densenet121
+    attention: null
+    expected_params_m: 8.0
+    expected_tb_sensitivity: "0.73-0.78"
+    
+  - name: densenet121_se
+    backbone: densenet121
+    attention: se
+    expected_params_m: 8.9
+    expected_tb_sensitivity: "0.78-0.83"
+    
+  - name: densenet121_cbam
+    backbone: densenet121
+    attention: cbam
+    expected_params_m: 9.2
+    expected_tb_sensitivity: "0.80-0.85"
+
+# Training presets for each model
+training_presets:
+  default:
+    epochs: 50
+    batch_size: 32
+    learning_rate: 1.0e-4
+    weight_decay: 1.0e-4
+    optimizer: AdamW
+    scheduler: CosineAnnealingLR
+    
+  # Fine-tuning preset (faster, for ablation studies)
+  fast:
+    epochs: 30
+    batch_size: 64
+    learning_rate: 3.0e-4
+    weight_decay: 1.0e-4
+    optimizer: AdamW
+    scheduler: CosineAnnealingLR
+    
+  # Full training preset (best results)
+  full:
+    epochs: 100
+    batch_size: 32
+    learning_rate: 5.0e-5
+    weight_decay: 5.0e-5
+    optimizer: AdamW
+    scheduler: ReduceLROnPlateau
