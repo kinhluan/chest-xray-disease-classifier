@@ -54,27 +54,51 @@ def main():
     print("\n📝 Creating kernel on Kaggle...")
 
     kernel_id = "luanbhk/chest-xray-attention-training"
+    kernel_slug = "chest-xray-attention-training"
     
+    # Title must match the slug for existing kernels
+    # Kaggle determines slug from title: "Chest X-Ray Attention Training" -> "chest-xray-attention-training"
+    actual_title = "Chest X-Ray Attention Training"
+
     try:
-        # Create kernel
-        kernel = api.kernels_push(
-            kernel=notebook_path,
-            kernel_meta={
-                "id": kernel_id,
-                "title": args.title,
-                "code_file": args.notebook,
-                "language": "python",
-                "kernel_type": "notebook",
-                "is_private": False,
-                "enable_gpu": True,
-                "enable_internet": True,
-                "dataset_sources": [
-                    "jtiptj/chest-xray-pneumoniacovid19tuberculosis"
-                ],
-                "competition_sources": [],
-                "kernel_sources": []
-            }
-        )
+        # Create kernel metadata file
+        kernel_meta = {
+            "id": kernel_id,
+            "title": actual_title,
+            "code_file": args.notebook,
+            "language": "python",
+            "kernel_type": "notebook",
+            "is_private": False,
+            "enable_gpu": True,
+            "enable_internet": True,
+            "dataset_sources": [
+                "jtiptj/chest-xray-pneumoniacovid19tuberculosis"
+            ],
+            "competition_sources": [],
+            "kernel_sources": []
+        }
+
+        # Write kernel-metadata.json
+        import json
+        import shutil
+        
+        # Create temp directory for kernel push
+        temp_dir = Path("temp_kaggle_push")
+        temp_dir.mkdir(exist_ok=True)
+        
+        # Copy notebook to temp dir
+        shutil.copy(notebook_path, temp_dir / args.notebook)
+        
+        # Write kernel-metadata.json
+        with open(temp_dir / "kernel-metadata.json", "w") as f:
+            json.dump(kernel_meta, f, indent=2)
+        
+        # Push kernel
+        kernel = api.kernels_push(folder=str(temp_dir))
+        
+        # Cleanup temp dir
+        shutil.rmtree(temp_dir)
+        
         print(f"✅ Kernel created/updated!")
         print(f"   URL: https://www.kaggle.com/code/{kernel_id}")
 

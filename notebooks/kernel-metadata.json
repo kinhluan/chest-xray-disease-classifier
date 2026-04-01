@@ -1,0 +1,15 @@
+{
+  "id": "luanbhk/chest-x-ray-attention-training-all-7-models",
+  "title": "Chest X-Ray Attention Training - All 7 Models",
+  "code_file": "kaggle_train_all_models.ipynb",
+  "language": "python",
+  "kernel_type": "notebook",
+  "is_private": false,
+  "enable_gpu": true,
+  "enable_internet": true,
+  "dataset_sources": [
+    "jtiptj/chest-xray-pneumoniacovid19tuberculosis"
+  ],
+  "competition_sources": [],
+  "kernel_sources": []
+}
