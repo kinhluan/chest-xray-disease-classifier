@@ -3,6 +3,16 @@
     "huggingface": {
       "url": "https://huggingface.co/mcp",
       "type": "http"
+    },
+    "kaggle": {
+      "command": "uvx",
+      "args": [
+        "mcp-server-kaggle"
+      ],
+      "env": {
+        "KAGGLE_USERNAME": "luanbhk",
+        "KAGGLE_KEY": "310dd14a64c263ab8524c21d9b417f83"
+      }
     }
   }
 }
